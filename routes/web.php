@@ -16,5 +16,13 @@
 // });
 
 Route::get('/','HomeController@index');
-Route::get('/login','HomeController@getLogin');
-Route::get('/register','HomeController@getRegister');
+Route::get('login','HomeController@getLogin')->name('login');
+
+Route::get('register','HomeController@getRegister')->name('register');
+Route::post('register','HomeController@postRegister')->name('register');
+
+
+// Route::post('register',[
+//     'uses'=>'HomeController@postRegister',
+//     'as'=>'register'
+// ]);
