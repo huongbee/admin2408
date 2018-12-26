@@ -4,20 +4,50 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use App\User;
+use Hash;
+use Auth;
 
 class HomeController extends Controller
 {
     function index(){
-        return view('pages.index');
+        if(Auth::check()){
+            return view('pages.index');
+        }
+        else{
+            return redirect()->route('login')->with('error','You must login!');
+        }
     }
 
     function getLogin(){
         return view('pages.login');
     }
+    function postLogin(Request $req){
+        //validation
+
+        $data = [
+            'email'=>$req->email,
+            'password'=>$req->password
+        ];
+        if(Auth::attempt($data)){ // boolean
+            // dd(Auth::user()); // User::get();
+            return redirect()->route('home');
+            // return redirect('/');
+        }
+        else{
+            return redirect()->back()->with('error','Email or password invalid!');
+        }
+    }
+
+
     function getRegister(){
         return view('pages.register');
     }
     function postRegister(Request $req){
+        $mess = [
+            'username.unique' => 'Username đã có người sử dụng',
+
+        ];
         $validator = Validator::make($req->all(), [
             'username'=>'required|min:6|unique:users,username',
             'fullname'=>'required',
@@ -26,14 +56,20 @@ class HomeController extends Controller
             'email'=>'required|email|unique:users,email',
             'password'=>'required|min:6',
             'confirmation_password'=>'required|same:password'
-        ]);
-
+        ],$mess);
         if ($validator->fails()) {
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput($req->all());
         }
-
-        dd($req->all());
+        $user = new User;
+        $user->username = $req->username;
+        $user->fullname = $req->fullname;
+        $user->birthdate = date('Y-m-d',strtotime($req->birthdate));
+        $user->gender = $req->gender;
+        $user->email = $req->email;
+        $user->password = Hash::make($req->password);
+        $user->save();
+        return redirect()->route('login')->with('success','You can login now!');
     }
 }
