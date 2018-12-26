@@ -16,3 +16,5 @@
 // });
 
 Route::get('/','HomeController@index');
+Route::get('/login','HomeController@getLogin');
+Route::get('/register','HomeController@getRegister');

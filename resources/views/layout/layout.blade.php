@@ -289,7 +289,7 @@
       <!--main content end-->
 
       <!--footer start-->
-      <footer class="site-footer">
+      <footer class="site-footer" style="width:100%; position:fixed;bottom:0px">
           <div class="text-center">
               2017 &copy; Hương Hương.
               <a href="#" class="go-top">

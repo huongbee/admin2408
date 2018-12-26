@@ -1,5 +1,5 @@
 <aside>
-    <div id="sidebar"  class="nav-collapse ">
+    <div id="sidebar"  class="nav-collapse" style="z-index:1">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
             <li>
