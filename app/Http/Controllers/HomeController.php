@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validation;
+use Validator;
 
 class HomeController extends Controller
 {
@@ -19,7 +19,7 @@ class HomeController extends Controller
     }
     function postRegister(Request $req){
         $validator = Validator::make($req->all(), [
-            'username'=>'required|min:10|unique:users,username',
+            'username'=>'required|min:6|unique:users,username',
             'fullname'=>'required',
             'birthdate'=>'required',
             'gender'=>'required',
