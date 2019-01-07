@@ -10,15 +10,7 @@ use Auth;
 
 class HomeController extends Controller
 {
-    function index(){
-        if(Auth::check()){
-            return view('pages.index');
-        }
-        else{
-            return redirect()->route('login')->with('error','You must login!');
-        }
-    }
-
+    
     function getLogin(){
         return view('pages.login');
     }
@@ -71,5 +63,19 @@ class HomeController extends Controller
         $user->password = Hash::make($req->password);
         $user->save();
         return redirect()->route('login')->with('success','You can login now!');
+    }
+
+    function logout(){
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
+
+    function index(){
+        return view('pages.index');
+    }
+
+    function listBill(Request $req){
+        echo $req->status;
     }
 }
