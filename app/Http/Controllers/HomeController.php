@@ -7,10 +7,21 @@ use Validator;
 use App\User;
 use Hash;
 use Auth;
+use App\Bill;
 
 class HomeController extends Controller
 {
-    
+    function index(){
+        return redirect()->route('listbill',['status'=>0]);
+    }
+
+    function listBill(Request $req){
+        $status = $req->status;
+        $bills = Bill::with('customer','product','billDetail')
+                ->where('status','=',$status)
+                ->get();
+        return view('pages.index',compact('bills','status'));
+    }
     function getLogin(){
         return view('pages.login');
     }
@@ -71,11 +82,6 @@ class HomeController extends Controller
     }
 
 
-    function index(){
-        return view('pages.index');
-    }
+    
 
-    function listBill(Request $req){
-        echo $req->status;
-    }
 }
