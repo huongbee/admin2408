@@ -20,6 +20,7 @@
                     </b>
                 </div>
                 <div class="panel-body">
+                    @if(count($bills)>0)
                     <table class="table">
                         <thead>
                             <th>Mã hoá đơn</th>
@@ -34,6 +35,7 @@
                             @endif
                         </thead>
                         <tbody>
+                            @foreach($bills as $bill)
                             <tr>
                                 <td>HD12345</td>
                                 <td>....</td>
@@ -52,8 +54,14 @@
                                 </td>
                                 @endif
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    {{$bills->links()}}
+
+                    @else
+                    Chưa có đơn hàng
+                    @endif
                 </div>
             </div>
         </section>

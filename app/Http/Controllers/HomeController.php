@@ -19,7 +19,7 @@ class HomeController extends Controller
         $status = $req->status;
         $bills = Bill::with('customer','product','billDetail')
                 ->where('status','=',$status)
-                ->get();
+                ->paginate(5);
         return view('pages.index',compact('bills','status'));
     }
     function getLogin(){
