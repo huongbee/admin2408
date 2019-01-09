@@ -12,7 +12,25 @@ use App\Bill;
 class HomeController extends Controller
 {
     function updateStatusBill(Request $req){
-        print_r($req->all());
+        // $bill = Bill::where([
+        //     ['id','=',$req->id_bill],
+        //     ['status','=',0]
+        // ])->orWhere([
+        //     ['id','=',$req->id_bill],
+        //     ['status','=',1]
+        // ])->first();
+
+        $bill = Bill::where('id','=',$req->id_bill)
+                ->where(function($q){
+                    $q->where('status','=',0);
+                    $q->orWhere('status','=',1);
+                })->first();
+        if($bill){
+            echo 'ok';
+        }
+        else{
+            echo 'not ok';
+        }
     }
     function index(){
         return redirect()->route('listbill',['status'=>0]);
