@@ -11,6 +11,9 @@ use App\Bill;
 
 class HomeController extends Controller
 {
+    function updateStatusBill(Request $req){
+        print_r($req->all());
+    }
     function index(){
         return redirect()->route('listbill',['status'=>0]);
     }

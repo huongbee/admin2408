@@ -60,6 +60,7 @@
                                 @if($status==0 || $status==1)
                                 <td>
                                 <button style="width:100%" class="btn btn-sm btn-danger btn-cancel" data-id="{{$bill->id}}">Huỷ đơn hàng</button>
+
                                     <br>
                                     @if($status==1)
                                     <button style="width:100%" class="btn btn-sm btn-success">Hoàn tất</button>
@@ -94,18 +95,34 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
-                <button type="button" class="btn btn-primary">Tiếp tục</button>
+                <button type="button" class="btn btn-primary" id="btn-continue">Tiếp tục</button>
             </div>
         </div>
     </div>
-  </div>
+</div>
 <script>
 $(document).ready(function(){
     $('.btn-cancel').click(function(){
         var idBill = $(this).attr('data-id')
         $('.modal-title').text('ĐH HD-'+idBill+' sẽ chuyển sang trạng thái huỷ!')
         $('#myModal').modal('show')
-
+        $('#btn-continue').click(function(){
+            $.ajax({
+                url:"{{route('updatebill')}}",
+                type:'POST',
+                data:{
+                    idbill:idBill,
+                    status:3,
+                    _token:"{{csrf_token()}}"
+                },
+                success:function(res){
+                    console.log(res)
+                },
+                error:function(){
+                    console.log('errr')
+                }
+            })
+        })
     })
 })
 </script>
