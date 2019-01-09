@@ -36,7 +36,7 @@
                         </thead>
                         <tbody>
                             @foreach($bills as $bill)
-                            <tr>
+                            <tr id="bill-{{$bill->id}}">
                                 <td>HD-{{$bill->id}}</td>
                                 <td>{{date('d-m-Y H:i:s',strtotime($bill->date_order))}}</td>
                                 <td>
@@ -116,7 +116,13 @@ $(document).ready(function(){
                     _token:"{{csrf_token()}}"
                 },
                 success:function(res){
-                    console.log(res)
+                    if($.trim(res)=='ok'){
+                        $('#bill-'+idBill).remove()
+                        $('#myModal').modal('hide')
+                        alert('Cập nhật thành công')
+                    }
+                    else 
+                    alert('Vui lòng thử lại')
                 },
                 error:function(){
                     console.log('errr')

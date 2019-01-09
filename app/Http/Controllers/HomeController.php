@@ -26,11 +26,15 @@ class HomeController extends Controller
                     $q->orWhere('status','=',1);
                 })->first();
         if($bill){
+            $bill->status = $req->status;
+            $bill->save();
             echo 'ok';
         }
         else{
-            echo 'not ok';
+            echo 'notok';
         }
+        return;
+
     }
     function index(){
         return redirect()->route('listbill',['status'=>0]);
