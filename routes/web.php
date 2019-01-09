@@ -37,6 +37,7 @@ Route::group(['middleware'=>'checkLogin'],function(){
     Route::get('bill/{status}','HomeController@listBill')
             ->name('listbill')->where('status','[0-3]{1}+');
 
+    Route::post('update-bill/{idbill}/{status}','HomeController@updateStatusBill')->name('updatebill');
 
 
 

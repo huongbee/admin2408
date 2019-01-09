@@ -37,19 +37,32 @@
                         <tbody>
                             @foreach($bills as $bill)
                             <tr>
-                                <td>HD12345</td>
+                                <td>HD-{{$bill->id}}</td>
+                                <td>{{date('d-m-Y H:i:s',strtotime($bill->date_order))}}</td>
+                                <td>
+                                    <p>{{$bill->customer->name}}</p>
+                                    <p>{{$bill->customer->phone}}</p>
+                                    <p>{{$bill->customer->address}}</p>
+                                </td>
                                 <td>....</td>
+                                <td>
+                                    @foreach($bill->product as $product)
+                                    <div>
+                                        <p>{{$product->name}}</p>
+                                        <p><img src="products-images/{{$product->image}}" height="80px"></p>
+                                        <hr>
+                                    </div>
+                                    @endforeach
+                                </td>
                                 <td>....</td>
-                                <td>....</td>
-                                <td>....</td>
-                                <td>....</td>
+
                                 <td>....</td>
                                 @if($status==0 || $status==1)
                                 <td>
-                                    Huỷ đơn hàng
+                                    <button style="width:100%" class="btn btn-sm btn-danger">Huỷ đơn hàng</button>
                                     <br>
                                     @if($status==1)
-                                    Hoàn tất
+                                    <button style="width:100%" class="btn btn-sm btn-success">Hoàn tất</button>
                                     @endif
                                 </td>
                                 @endif
@@ -68,4 +81,26 @@
       </div>
     </section>
 </section>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    <form action="" method="post">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
+                <button type="submit">OK</button>
+            </div>
+        </div>
+    </form>
+    </div>
+  </div>
+
+
 @endsection
