@@ -104,15 +104,11 @@
 $(document).ready(function(){
     $('.btn-cancel').click(function(){
         var idBill = $(this).attr('data-id')
-        var route = "{{route('updatebill',['idbill',3])}}"
-        console.log(route)
-        route = route.replace('idbill',idBill)
-        console.log(route)
         $('.modal-title').text('ĐH HD-'+idBill+' sẽ chuyển sang trạng thái huỷ!')
         $('#myModal').modal('show')
         $('#btn-continue').click(function(){
             $.ajax({
-                url:route,
+                url:"{{route('updatebill')}}",
                 type:'POST',
                 data:{
                     id_bill:idBill,
