@@ -59,7 +59,7 @@
                                 <td>....</td>
                                 @if($status==0 || $status==1)
                                 <td>
-                                    <button style="width:100%" class="btn btn-sm btn-danger">Huỷ đơn hàng</button>
+                                <button style="width:100%" class="btn btn-sm btn-danger btn-cancel" data-id="{{$bill->id}}">Huỷ đơn hàng</button>
                                     <br>
                                     @if($status==1)
                                     <button style="width:100%" class="btn btn-sm btn-success">Hoàn tất</button>
@@ -84,7 +84,6 @@
 
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-    <form action="" method="post">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -95,12 +94,20 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
-                <button type="submit">OK</button>
+                <button type="button" class="btn btn-primary">Tiếp tục</button>
             </div>
         </div>
-    </form>
     </div>
   </div>
+<script>
+$(document).ready(function(){
+    $('.btn-cancel').click(function(){
+        var idBill = $(this).attr('data-id')
+        $('.modal-title').text('ĐH HD-'+idBill+' sẽ chuyển sang trạng thái huỷ!')
+        $('#myModal').modal('show')
 
+    })
+})
+</script>
 
 @endsection

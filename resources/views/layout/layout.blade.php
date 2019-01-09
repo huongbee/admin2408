@@ -25,14 +25,8 @@
 
     <link href="admin-master/css/style.css" rel="stylesheet">
     <link href="admin-master/css/style-responsive.css" rel="stylesheet" />
+    <script src="admin-master/js/jquery.js"></script>
 
-
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-      <script src="admin-master/js/html5shiv.js"></script>
-      <script src="admin-master/js/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -301,7 +295,6 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="admin-master/js/jquery.js"></script>
     <script src="admin-master/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="admin-master/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="admin-master/js/jquery.scrollTo.min.js"></script>
