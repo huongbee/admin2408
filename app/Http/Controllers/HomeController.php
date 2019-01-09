@@ -12,6 +12,7 @@ use App\Bill;
 class HomeController extends Controller
 {
     function updateStatusBill(Request $req){
+        print_r($req->all());die;
         // $bill = Bill::where([
         //     ['id','=',$req->id_bill],
         //     ['status','=',0]

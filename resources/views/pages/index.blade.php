@@ -95,7 +95,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
-                <button type="button" class="btn btn-primary" id="btn-continue">Tiếp tục</button>
+                <button type="button" class="btn btn-primary" id="btn-continue" data-id="null">Tiếp tục</button>
             </div>
         </div>
     </div>
@@ -106,28 +106,31 @@ $(document).ready(function(){
         var idBill = $(this).attr('data-id')
         $('.modal-title').text('ĐH HD-'+idBill+' sẽ chuyển sang trạng thái huỷ!')
         $('#myModal').modal('show')
-        $('#btn-continue').click(function(){
-            $.ajax({
-                url:"{{route('updatebill')}}",
-                type:'POST',
-                data:{
-                    id_bill:idBill,
-                    status:3,
-                    _token:"{{csrf_token()}}"
-                },
-                success:function(res){
-                    if($.trim(res)=='ok'){
-                        $('#bill-'+idBill).remove()
-                        $('#myModal').modal('hide')
-                        alert('Cập nhật thành công')
-                    }
-                    else 
-                    alert('Vui lòng thử lại')
-                },
-                error:function(){
-                    console.log('errr')
-                }
-            })
+        $('#btn-continue').attr('data-id',idBill)
+    })
+    $('#btn-continue').click(function(){
+        var idBill = $(this).attr('data-id')
+        $.ajax({
+            url:"{{route('updatebill')}}",
+            type:'POST',
+            data:{
+                id_bill:idBill,
+                status:3,
+                _token:"{{csrf_token()}}"
+            },
+            success:function(res){
+                console.log(res)
+                // if($.trim(res)=='ok'){
+                //     $('#bill-'+idBill).remove()
+                //     $('#myModal').modal('hide')
+                //     alert('Cập nhật thành công')
+                // }
+                // else 
+                //     alert('Vui lòng thử lại')
+            },
+            error:function(){
+                console.log('errr')
+            }
         })
     })
 })
