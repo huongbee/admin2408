@@ -119,14 +119,14 @@ $(document).ready(function(){
                 _token:"{{csrf_token()}}"
             },
             success:function(res){
-                console.log(res)
-                // if($.trim(res)=='ok'){
-                //     $('#bill-'+idBill).remove()
-                //     $('#myModal').modal('hide')
-                //     alert('Cập nhật thành công')
-                // }
-                // else 
-                //     alert('Vui lòng thử lại')
+                // console.log(res)
+                if($.trim(res)=='ok'){
+                    $('#bill-'+idBill).remove()
+                    $('#myModal').modal('hide')
+                    alert('Cập nhật thành công')
+                }
+                else 
+                    alert('Vui lòng thử lại')
             },
             error:function(){
                 console.log('errr')
