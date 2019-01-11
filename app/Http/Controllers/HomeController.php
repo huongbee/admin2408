@@ -13,6 +13,9 @@ use App\Categories;
 
 class HomeController extends Controller
 {
+    function addProduct(){
+        
+    }
     function listProduct($idType){
         $type = Categories::where('id',$idType)->first();
         if($type){

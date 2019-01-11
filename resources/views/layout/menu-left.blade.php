@@ -2,15 +2,9 @@
     <div id="sidebar"  class="nav-collapse" style="z-index:1">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-            <li>
-                <a class="active" href="index.html">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
+            
             <li class="sub-menu">
-                <a href="javascript:;" >
+                <a class="@if(Request::segment(1)=='bill') active @endif" href="javascript:;" >
                     <i class=" fa fa-envelope"></i>
                     <span>Quản lý đơn hàng</span>
                 </a>
@@ -19,8 +13,14 @@
                     <li><a  href="inbox_details.html">Inbox Details</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="@if(Request::segment(1)=='add-product') active @endif"  href="{{route('add-product')}}" >
+                    <i class="fa fa-plus"></i>
+                    <span>Thêm sản phẩm</span>
+                </a>
+            </li>
             <li class="sub-menu">
-                <a href="javascript:;" >
+                <a class="@if(Request::segment(1)=='list-product') active @endif" href="javascript:;" >
                     <i class=" fa fa-bar-chart-o"></i>
                     <span>Danh sách loại</span>
                 </a>
@@ -40,12 +40,7 @@
                     <li><a  href="product_details.html">Details View</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="google_maps.html" >
-                    <i class="fa fa-map-marker"></i>
-                    <span>Google Maps </span>
-                </a>
-            </li>
+            
 
             <!--multi level menu start-->
             <li class="sub-menu">
