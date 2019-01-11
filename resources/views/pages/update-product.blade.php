@@ -11,75 +11,101 @@
                     </b>
                 </div>
                 <div class="panel-body">
-                    <form action="" method="POST">
+                    <form action="{{route('update-product',$product->id)}}" method="POST">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="name">Tên sản phẩm:</label>
-                                    <input type="text" class="form-control" name="name">
+                                    <input type="text" class="form-control" name="name" value="{{$product->name}}">
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="price">Đơn giá:</label>
-                                    <input type="text" class="form-control" name="price">
+                                    <input type="text" class="form-control" name="price"
+                                    value="{{$product->price}}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Khuyến mãi kèm theo:</label>
-                                    <input type="text" class="form-control" name="promotion">
-                                </div>
+                                
                                 
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="name">Chọn loại:</label>
                                     <select name="type" class="form-control">
-                                        <option value="">Loai A</option>
+                                        @foreach($menu as $m)
+                                        <option @if($product->id_type==$m->id) selected @endif value="{{$m->id}}">{{$m->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="checkbox">
                                     <label for="price">Đơn giá khuyến mãi:</label>
-                                    <input type="text" class="form-control" name="promotion_price">
+                                    <input type="text" class="form-control" name="promotion_price" value="{{$product->promotion_price}}">
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Khuyến mãi kèm theo:</label>
+                                        <textarea rows=5 class="form-control" name="promotion" id="promotion">{{$product->promotion}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="price">Mô tả:</label>
-                                    <textarea  class="form-control" name="promotion_price"></textarea>
+                                    <textarea rows="10" class="form-control" name="detail" id="detail">{{$product->detail}}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    <img src="products-images/{{$product->image}}" height="80px">
                                     <input type="file" name="image">
+
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="checkbox">
+                                    <label>Sản phẩm đặc biệt</label>
                                     <label>
-                                        <input type="checkbox" name="status"> Sản phẩm đặc biệt?</label>
+                                        <input type="radio" name="status" @if($product->status==1) checked @endif> Yes
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" @if($product->status==0) checked @endif> No
+                                    </label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                                 <div class="col-sm-12">
                                     <div class="checkbox">
+                                        <label>Sản phẩm mới</label>
                                         <label>
-                                            <input type="checkbox" name="new"> Sản phẩm mới?</label>
+                                            <input type="radio" name="new" @if($product->new==1) checked @endif> Yes
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="new" @if($product->new==0) checked @endif> No
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                         <button type="submit" class="btn btn-success">Submit</button>
-                        </form>
+                    </form>
                 </div>
             </div>
         </section>
       </div>
     </section>
 </section>
+<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('detail')
+CKEDITOR.replace('promotion')
 
+</script>
 @endsection
