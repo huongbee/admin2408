@@ -31,15 +31,12 @@ Route::post('register','HomeController@postRegister')->name('register');
 
 Route::group(['middleware'=>'checkLogin'],function(){
     Route::get('logout','HomeController@logout')->name('logout');
-
     Route::get('/','HomeController@index')->name('home');
-
     Route::get('bill/{status}','HomeController@listBill')
             ->name('listbill')->where('status','[0-3]{1}+');
-
     Route::post('update-bill','HomeController@updateStatusBill')->name('updatebill');
 
-
+    Route::get('list-product/{idtype}','HomeController@listProduct')->name('list-product');
 
 
     Route::get('add-product','HomeController@addProduct')->name('add-product');

@@ -12,7 +12,7 @@
             <li class="sub-menu">
                 <a href="javascript:;" >
                     <i class=" fa fa-envelope"></i>
-                    <span>Mail</span>
+                    <span>Quản lý đơn hàng</span>
                 </a>
                 <ul class="sub">
                     <li><a  href="inbox.html">Inbox</a></li>
@@ -22,13 +22,12 @@
             <li class="sub-menu">
                 <a href="javascript:;" >
                     <i class=" fa fa-bar-chart-o"></i>
-                    <span>Charts</span>
+                    <span>Danh sách loại</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="morris.html">Morris</a></li>
-                    <li><a  href="chartjs.html">Chartjs</a></li>
-                    <li><a  href="flot_chart.html">Flot Charts</a></li>
-                    <li><a  href="xchart.html">xChart</a></li>
+                    @foreach($menu as $m)
+                    <li><a href="{{route('list-product',$m->id)}}">{{$m->name}}</a></li>
+                    @endforeach
                 </ul>
             </li>
             <li class="sub-menu">
