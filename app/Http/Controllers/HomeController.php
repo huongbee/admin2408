@@ -8,9 +8,26 @@ use App\User;
 use Hash;
 use Auth;
 use App\Bill;
+use App\Products;
+use App\Categories;
 
 class HomeController extends Controller
 {
+    function listProduct($idType){
+        $type = Categories::where('id',$idType)->first();
+        if($type){
+            $listProduct = Products::where([
+                ['id_type','=',$idType],
+                ['deleted','=',0]
+            ])->paginate(5);
+            // dd($listProduct);
+            return view('pages.list-product',compact('listProduct'));
+        }
+        else{
+            return redirect()->back()->with('error','Không tìm thấy loại sp');
+        }
+        
+    }
     function updateStatusBill(Request $req){
         // print_r($req->all());die;
         // $bill = Bill::where([

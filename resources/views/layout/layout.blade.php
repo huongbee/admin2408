@@ -281,7 +281,7 @@
       <!--main content start-->
         @yield('content')
       <!--main content end-->
-
+      @include('layout.notification')
       <!--footer start-->
       <footer class="site-footer" style="width:100%; position:fixed;bottom:0px">
           <div class="text-center">
