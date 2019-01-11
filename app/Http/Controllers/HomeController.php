@@ -21,7 +21,7 @@ class HomeController extends Controller
                 ['deleted','=',0]
             ])->paginate(5);
             // dd($listProduct);
-            return view('pages.list-product',compact('listProduct'));
+            return view('pages.list-product',compact('listProduct','type'));
         }
         else{
             return redirect()->back()->with('error','Không tìm thấy loại sp');
