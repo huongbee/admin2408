@@ -44,7 +44,7 @@
                                 <td>....</td>
                                 <td>
                                     <button class="btn btn-primary" style="width:100%">
-                                        <a href="" style="color:#fff">
+                                    <a href="{{route('update-product',$product->id)}}" style="color:#fff">
                                             Cập nhật
                                         </a>
                                     </button>

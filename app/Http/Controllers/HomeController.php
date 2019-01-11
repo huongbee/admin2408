@@ -13,6 +13,15 @@ use App\Categories;
 
 class HomeController extends Controller
 {
+    function getUpdateProduct($id){
+        $product = Products::find($id);
+        if($product){
+            return view('pages.update-product',compact('product'));
+        }
+        else{
+            return redirect()->back()->with('error','Không tìm thấy sp');
+        }
+    }
     function addProduct(){
         
     }

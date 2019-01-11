@@ -37,6 +37,8 @@ Route::group(['middleware'=>'checkLogin'],function(){
     Route::post('update-bill','HomeController@updateStatusBill')->name('updatebill');
 
     Route::get('list-product/{idtype}','HomeController@listProduct')->name('list-product');
+    Route::get('update-product/{id}','HomeController@getUpdateProduct')->name('update-product');
+    Route::post('update-product/{id}','HomeController@postUpdateProduct')->name('update-product');
 
 
     Route::get('add-product','HomeController@addProduct')->name('add-product');
