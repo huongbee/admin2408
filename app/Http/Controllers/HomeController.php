@@ -15,6 +15,53 @@ use App\Helpers\Helper;
 
 class HomeController extends Controller
 {
+    function addProduct(){
+        return view('pages.add-product');
+    }
+    function postAddProduct(Request $req){
+        $helper = new Helper;
+
+        $url = new PageUrl;
+        $url->url = $helper->changeTitle($req->name);
+        $url->save();
+
+        $product = new Products;
+        $product->name = $req->name;
+        $product->price = $req->price;
+        $product->promotion_price = $req->promotion_price;
+        $product->detail = $req->detail;
+        $product->id_type = $req->type;
+        $product->id_url = $url->id; //line 26
+        $product->promotion = $req->promotion;
+        $product->update_at = date('Y-m-d H:i:s',time());
+        if(isset($req->status)){
+            $product->status = $req->status;
+        }
+        $product->new = isset($req->new) ? $req->new : 0;
+
+        if($req->hasFile('image')){
+            $image = $req->file('image');
+            if($image->getSize() > 2*1024*1024){
+                return redirect()->back()->with('error','File quá lớn');
+            }
+            $arrExt = ['png','jpg','gif','jpeg'];
+            $ext = $image->getClientOriginalExtension();
+            if(!in_array($ext,$arrExt)){
+                return redirect()->back()->with('error','File không cho phép');
+            }
+            $newName = date('Y-m-d-H-i-s-',time()).$image->getClientOriginalName();
+            $image->move("products-images/",$newName);
+            //save new name
+            $product->image = $newName;
+        }
+        else{
+            return redirect()->back()->with('error','Vui lòng chọn hình');
+        }
+        $product->save();
+        return redirect()->route('list-product',$product->id_type)->with('success','Thêm thành công');
+
+
+    }
     function postUpdateProduct(Request $req){
         $product = Products::find($req->id);
         if(!$product){
@@ -73,9 +120,7 @@ class HomeController extends Controller
             return redirect()->back()->with('error','Không tìm thấy sp');
         }
     }
-    function addProduct(){
-        
-    }
+   
     function listProduct($idType){
         $type = Categories::where('id',$idType)->first();
         if($type){
@@ -184,6 +229,10 @@ class HomeController extends Controller
 
     function logout(){
         Auth::logout();
+
+
+        //Auth::guard('customers')->logout();
+
         return redirect()->route('login');
     }
 

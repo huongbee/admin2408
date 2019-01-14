@@ -42,5 +42,14 @@ Route::group(['middleware'=>'checkLogin'],function(){
 
 
     Route::get('add-product','HomeController@addProduct')->name('add-product');
+    Route::post('add-product','HomeController@postAddProduct')->name('add-product');
 
+
+    
+});
+
+
+
+Route::post('test',function(){
+    return [3,5,6];
 });
