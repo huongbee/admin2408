@@ -13,6 +13,14 @@ use App\Categories;
 
 class HomeController extends Controller
 {
+    function postUpdateProduct(Request $req){
+        $product = Products::find($req->id);
+        if(!$product){
+            return redirect()->back()->with('error','Không tìm thấy sp');
+        }
+        
+
+    }
     function getUpdateProduct($id){
         $product = Products::find($id);
         if($product){
