@@ -11,7 +11,8 @@
                     </b>
                 </div>
                 <div class="panel-body">
-                    <form action="{{route('update-product',$product->id)}}" method="POST">
+                    <form action="{{route('update-product',$product->id)}}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -73,10 +74,10 @@
                                 <div class="checkbox">
                                     <label>Sản phẩm đặc biệt</label>
                                     <label>
-                                        <input type="radio" name="status" @if($product->status==1) checked @endif> Yes
+                                        <input value="1" type="radio" name="status" @if($product->status==1) checked @endif> Yes
                                     </label>
                                     <label>
-                                        <input type="radio" name="status" @if($product->status==0) checked @endif> No
+                                        <input value="0" type="radio" name="status" @if($product->status==0) checked @endif> No
                                     </label>
                                 </div>
                             </div>
@@ -86,10 +87,10 @@
                                     <div class="checkbox">
                                         <label>Sản phẩm mới</label>
                                         <label>
-                                            <input type="radio" name="new" @if($product->new==1) checked @endif> Yes
+                                            <input value="1" type="radio" name="new" @if($product->new==1) checked @endif> Yes
                                         </label>
                                         <label>
-                                            <input type="radio" name="new" @if($product->new==0) checked @endif> No
+                                            <input value="0" type="radio" name="new" @if($product->new==0) checked @endif> No
                                         </label>
                                     </div>
                                 </div>

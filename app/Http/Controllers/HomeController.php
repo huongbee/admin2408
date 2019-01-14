@@ -10,6 +10,8 @@ use Auth;
 use App\Bill;
 use App\Products;
 use App\Categories;
+use App\PageUrl;
+use App\Helpers\Helper;
 
 class HomeController extends Controller
 {
@@ -18,7 +20,48 @@ class HomeController extends Controller
         if(!$product){
             return redirect()->back()->with('error','Không tìm thấy sp');
         }
-        
+        //update product
+        $product->name = $req->name;
+        $product->price = $req->price;
+        $product->promotion_price = $req->promotion_price;
+        $product->detail = $req->detail;
+        $product->id_type = $req->type;
+        $product->promotion = $req->promotion;
+        $product->update_at = date('Y-m-d H:i:s',time());
+        if(isset($req->status)){
+            $product->status = $req->status;
+        }
+        $product->new = isset($req->new) ? $req->new : $product->new;
+
+        if($req->hasFile('image')){
+            $image = $req->file('image');
+            if($image->getSize() > 2*1024*1024){
+                return redirect()->back()->with('error','File quá lớn');
+            }
+            $arrExt = ['png','jpg','gif','jpeg'];
+            $ext = $image->getClientOriginalExtension();
+            if(!in_array($ext,$arrExt)){
+                return redirect()->back()->with('error','File không cho phép');
+            }
+            $newName = date('Y-m-d-H-i-s-',time()).$image->getClientOriginalName();
+            $image->move("products-images/",$newName);
+            if(file_exists("products-images/".$product->image)){
+                unlink("products-images/".$product->image);
+            }
+            //save new name
+            $product->image = $newName;
+        }
+        $product->save();
+        //update url
+        //find page_url
+        $url = PageUrl::find($product->id_url);
+        if($url){
+            $helper = new Helper;
+            $url->url = $helper->changeTitle($product->name);
+            $url->save();
+        }
+        return redirect()->route('list-product',$product->id_type)->with('success','Cập nhật thành công');
+
 
     }
     function getUpdateProduct($id){

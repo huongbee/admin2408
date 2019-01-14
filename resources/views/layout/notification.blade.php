@@ -16,3 +16,18 @@
 
 </script>
 @endif
+@if(Session::has('success'))
+<script>
+    $.notify({
+        message: "{{Session::get('success')}}"
+    },{
+        type: 'success',
+        offset: 50,
+        placement: {
+            from: "bottom",
+            align: "right"
+        },
+    });
+
+</script>
+@endif
